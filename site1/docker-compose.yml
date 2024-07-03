@@ -1,14 +1,13 @@
 services:
-  nginx:
+  nginx_site1:
     image: nginx:latest
     container_name: nginx_site1
-    ports:
-      - "8001:8001"
     networks:
       - nginx_network
     volumes:
-      - ./index.html:/var/www/html/index.html:ro
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
 
 networks:
   nginx_network:

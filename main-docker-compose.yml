@@ -3,19 +3,25 @@ services:
     container_name: nginx_site1
     extends:
       file: ./site1/docker-compose.yml
-      service: nginx
+      service: nginx_site1
 
   nginx_site2:
     container_name: nginx_site2
     extends:
       file: ./site2/docker-compose.yml
-      service: nginx
+      service: nginx_site2
 
   nginx_reverse_proxy:
     container_name: nginx_reverse_proxy
     extends:
       file: ./reverse_proxy/docker-compose.yml
-      service: nginx
+      service: nginx_reverse_proxy
+  #
+  # certbot:
+  #   container_name: certbot
+  #   extends:
+  #     file: ./reverse_proxy/docker-compose.yml
+  #     service: certbot
 
 networks:
   nginx_network:
