@@ -16,12 +16,6 @@ services:
     extends:
       file: ./reverse_proxy/docker-compose.yml
       service: nginx_reverse_proxy
-  #
-  # certbot:
-  #   container_name: certbot
-  #   extends:
-  #     file: ./reverse_proxy/docker-compose.yml
-  #     service: certbot
 
 networks:
   nginx_network:
