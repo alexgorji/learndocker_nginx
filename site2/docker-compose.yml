@@ -14,4 +14,5 @@ services:
 
 networks:
   nginx_network:
+    name: my-nginx-network
     external: true
