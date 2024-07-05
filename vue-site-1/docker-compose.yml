@@ -1,0 +1,39 @@
+services:
+  vue_site1:
+    build: ./vue-hello-world
+    networks:
+      - nginx_network
+    volumes:
+      - ./dist:/app/dist
+    command: npm run build
+  #    ports:
+  #      - "8080:8080"
+
+  nginx_vue_site1:
+    image: nginx:latest
+    container_name:
+      nginx_vue_site1
+    networks:
+      - nginx_network
+    env_file:
+      - .env
+    depends_on:
+      - vue_site1
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx-template.conf:/etc/nginx/templates/nginx-template.conf
+      - ./dist:/usr/share/nginx/html
+#    ports:
+#      - "80:80"
+    command:
+      - sh
+      - -c
+      - |
+        envsubst < /etc/nginx/templates/nginx-template.conf > /etc/nginx/conf.d/nginx.conf
+        nginx -g 'daemon off;'
+
+networks:
+  nginx_network:
+    name: my-nginx-network
+    external: true
