@@ -1,0 +1,9 @@
+[submodule "demo-simple-django-site"]
+	path = demo-simple-django-site
+	url = git@github.com:alexgorji/demo-simple-django-site
+[submodule "demo-simple-html-site"]
+	path = demo-simple-html-site
+	url = git@github.com:alexgorji/demo-simple-html-site
+[submodule "demo-simple-vue-site"]
+	path = demo-simple-vue-site
+	url = git@github.com:alexgorji/demo-simple-vue-site
