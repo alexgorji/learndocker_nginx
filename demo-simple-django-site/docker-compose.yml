@@ -1,6 +1,6 @@
 services:
   backend_django_site1:
-    build: ./simple-django-project
+    build: ./simple_django_project
     container_name:
       backend_django_site1
     command: gunicorn simple_django_project.wsgi:application --bind 0.0.0.0:8000
@@ -12,7 +12,7 @@ services:
   nginx_django_site1:
     image: nginx:latest
     container_name:
-      nginx_django_site1
+      ${NGINX_CONTAINER_NAME}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/conf.d:/etc/nginx/conf.d

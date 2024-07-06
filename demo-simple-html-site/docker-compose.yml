@@ -1,7 +1,7 @@
 services:
   nginx_site1:
     image: nginx:latest
-    container_name: nginx_site1
+    container_name: ${NGINX_CONTAINER_NAME}
     networks:
       - nginx_network
     env_file:

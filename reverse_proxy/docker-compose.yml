@@ -16,7 +16,7 @@ services:
       - sh
       - -c
       - |
-        envsubst '$${SERVER_NAME_1} $${SERVER_NAME_2} $${SERVER_NAME_3} $${SERVER_NAME_4}' < /etc/nginx/templates/nginx-template.conf > /etc/nginx/conf.d/nginx.conf
+        envsubst '$${SERVER_NAME_1} $${SERVER_NAME_2} $${SERVER_NAME_3}' < /etc/nginx/templates/nginx-template.conf > /etc/nginx/conf.d/nginx.conf
         nginx -g 'daemon off;'
 
 networks:
