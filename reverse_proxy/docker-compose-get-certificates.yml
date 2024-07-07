@@ -1,10 +1,11 @@
 services:
-  nginx_certbot
+  nginx_certbot:
     image: nginx:latest
     ports:
       - "80:80"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx-certificate.conf:/etc/nginx/conf.d/nginx.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
@@ -19,5 +20,5 @@ services:
       - ./data/certbot/www:/var/www/certbot
     entrypoint: >
       /bin/sh -c '
-      certbot certonly --webroot --webroot-path=/var/www/certbot --agree-tos --no-eff-email --staging --email aligorji@hotmail.comm -d docker-deploy-test-1.algor.cc -d docker-deploy-test-2.algor.cc -d docker-deploy-test-3.algor.cc
+      certbot certonly --webroot --webroot-path=/var/www/certbot --agree-tos --no-eff-email --staging --email aligorji@hotmail.com -d docker-deploy-test-1.algor.cc -d docker-deploy-test-2.algor.cc -d docker-deploy-test-3.algor.cc
       '
