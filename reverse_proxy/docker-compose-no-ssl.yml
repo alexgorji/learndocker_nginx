@@ -1,0 +1,26 @@
+services:
+  nginx_reverse_proxy:
+    image: nginx:latest
+    container_name: nginx_reverse_proxy
+    networks:
+      - nginx_network
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx-template.conf:/etc/nginx/templates/nginx-template.conf
+    command:
+      - sh
+      - -c
+      - |
+        envsubst '$${SERVER_NAME_1} $${SERVER_NAME_2} $${SERVER_NAME_3}' < /etc/nginx/templates/nginx-template.conf > /etc/nginx/conf.d/nginx.conf
+        nginx -g 'daemon off;'
+
+networks:
+  nginx_network:
+    name: ${NGINX_NETWORK_NAME}
+    external: true
+
