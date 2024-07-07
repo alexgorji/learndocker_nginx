@@ -31,15 +31,15 @@ services:
         sleep 12h;
       done
       '
-  certbot-init:
-    image: certbot/certbot
-    container_name: certbot-init
-    depends_on:
-      - nginx_reverse_proxy
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    entrypoint: >
-      /bin/sh -c '
-      certbot certonly --webroot --webroot-path=/var/www/certbot --agree-tos --no-eff-email --staging --email aligorji@hotmail.comm -d docker-deploy-test-1.algor.cc -d docker-deploy-test-2.algor.cc -d docker-deploy-test-3.algor.cc
-      '
+#  certbot-init:
+#    image: certbot/certbot
+#    container_name: certbot-init
+#    depends_on:
+#      - nginx_reverse_proxy
+#    volumes:
+#      - ./data/certbot/conf:/etc/letsencrypt
+#      - ./data/certbot/www:/var/www/certbot
+#    entrypoint: >
+#      /bin/sh -c '
+#      certbot certonly --webroot --webroot-path=/var/www/certbot --agree-tos --no-eff-email --staging --email aligorji@hotmail.comm -d docker-deploy-test-1.algor.cc -d docker-deploy-test-2.algor.cc -d docker-deploy-test-3.algor.cc
+#      '
