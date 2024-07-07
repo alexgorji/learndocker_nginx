@@ -21,6 +21,6 @@ services:
 
 networks:
   nginx_network:
-    name: my-nginx-network
+    name: ${NGINX_NETWORK_NAME}
     external: true
 
