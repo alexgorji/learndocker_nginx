@@ -20,5 +20,5 @@ services:
       - ./data/certbot/www:/var/www/certbot
     entrypoint: >
       /bin/sh -c '
-      certbot certonly --webroot --webroot-path=/var/www/certbot --agree-tos --no-eff-email --staging --email aligorji@hotmail.com -d docker-deploy-test-1.algor.cc -d docker-deploy-test-2.algor.cc -d docker-deploy-test-3.algor.cc
+      certonly --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email --staging -d ${SERVER_NAME_1} -d ${SERVER_NAME_2} -d ${SERVER_NAME_3}
       '
