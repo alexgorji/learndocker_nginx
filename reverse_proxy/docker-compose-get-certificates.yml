@@ -3,6 +3,8 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+    env_file:
+      - .env
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/nginx-certificate.conf:/etc/nginx/conf.d/nginx.conf
