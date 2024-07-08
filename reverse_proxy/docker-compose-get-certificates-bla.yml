@@ -3,6 +3,8 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+    env_file:
+      - .env
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/nginx-certificate.conf:/etc/nginx/conf.d/nginx.conf
@@ -18,7 +20,11 @@ services:
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
-    entrypoint: >
-      /bin/sh -c '
-      certbot certonly --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email --staging -d ${SERVER_NAME_1} -d ${SERVER_NAME_2} -d ${SERVER_NAME_3}
-      '
+    entrypoint:
+      - /bin/sh
+    command: 
+      - -c 
+      - |
+        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email --staging -d ${SERVER_NAME_1} -d ${SERVER_NAME_2} -d ${SERVER_NAME_3}
+#       tail -f /dev/null
+
