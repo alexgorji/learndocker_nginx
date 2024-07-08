@@ -1,0 +1,32 @@
+services:
+  nginx_certbot:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx-certificate.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+
+  certbot-init:
+    image: certbot/certbot
+    container_name: certbot-init
+    depends_on:
+      - nginx_certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint:
+      - /bin/sh
+    command:
+      - -c
+      - |
+        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email -d ${SERVER_NAME_1}
+        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email -d ${SERVER_NAME_2}
+        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email -d ${SERVER_NAME_3}
+
+#       tail -f /dev/null
