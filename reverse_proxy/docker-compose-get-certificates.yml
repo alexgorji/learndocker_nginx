@@ -25,6 +25,9 @@ services:
     command:
       - -c
       - |
-        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email --staging -d ${SERVER_NAME_1},${SERVER_NAME_2},${SERVER_NAME_3}
+        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email --staging -d ${SERVER_NAME_1}
+        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email --staging -d ${SERVER_NAME_2}
+        certbot certonly --force-renew --noninteractive --webroot --webroot-path=/var/www/certbot --email ${CERTBOT_EMAIL} --agree-tos --no-eff-email --staging -d ${SERVER_NAME_3}
+
 #       tail -f /dev/null
 
